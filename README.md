@@ -62,7 +62,7 @@ typedef struct
 
 Checks primality of Mersenne numbers for 2 &le; p &lt; 550 
 ```
-$ cd ../MIPS-MersenneScan
+$ cd ../MIPS-MersenneScan/src
 $ make
 $ ./mersenne
 ```
