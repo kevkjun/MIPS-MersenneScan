@@ -21,3 +21,4 @@ $ ./mersenne
 * Run
     * Test cases will print to console
     * Will use LLT algorithm to scan through Mersenne numbers for ![p_bounds](https://raw.githubusercontent.com/kevkjun/MIPS-MersenneScan/master/assets/p_bounds.gif "p_bounds")
+    * 3 &le; p &le; 128
