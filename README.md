@@ -20,4 +20,4 @@ $ ./mersenne
 * Load `mersenne.asm` into QtSpim
 * Run
     * Test cases will print to console
-    * Will use LLT algorithm to scan through Mersenne numbers for ![p_bounds](https://github.com/kevkjun/MIPS-MersenneScan/assets/p_bounds.gif "p_bounds")
+    * Will use LLT algorithm to scan through Mersenne numbers for ![p_bounds](https://raw.githubusercontent.com/kevkjun/MIPS-MersenneScan/master/assets/p_bounds.gif "p_bounds")
