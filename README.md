@@ -9,7 +9,7 @@ March 10, 2020
 Mersenne primes are special prime numbers of the form:
 
 <p align="center">
-   *M*<sub>p</sub> = 2<sup>p</sup> - 1
+   M<sub>p</sub> = 2<sup>p</sup> - 1
 </p>
 
 where *M*<sub>p</sub> is the Mersenne prime and *p* is a smaller prime number.
