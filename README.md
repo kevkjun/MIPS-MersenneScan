@@ -4,6 +4,8 @@ Kevin Jun
 
 March 10, 2020
 
+---
+
 ### Background
 Mersenne primes are special prime numbers of the form:
 
@@ -30,6 +32,8 @@ int Lucas_Lehmer_Test(int p)
 }
 ```
 
+---
+
 ### Implementation
 * Uses *Bigint* struct which stores large numbers as array to circumvent overflow for large *M*<sub>p</sub> values
 ```C
@@ -43,10 +47,16 @@ typedef struct
 * Mersenne scan implementations in C and MIPS Assembly
 * MIPS implementation utilizes the stack, heap, and registers
 
+---
+
 ### Files
 * `mersenne.c` and associated Makefile to implement Mersenne Scan in C
 * `mersenne.asm`: MIPS assembly to be run in QtMips 
 * `output.txt`: console output from `mersenne.asm`
+
+---
+
+### Run
 
 **Running `mersenne.c`**
 
