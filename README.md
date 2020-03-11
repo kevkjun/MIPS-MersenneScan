@@ -27,10 +27,11 @@ int Lucas_Lehmer_Test(int p)
       return 1; //prime
    else
       return 0; //not prime
+}
 ```
 
 ### Program
-* Uses Large Integer implementation (Bigint) which stores large numbers as array to circumvent overflow for large *M*<sub>p</sub> values
+* Uses *Bigint* struct which stores large numbers as array to circumvent overflow for large *M*<sub>p</sub> values
 ```C
 // Bigint interface
 typedef struct
@@ -48,6 +49,7 @@ typedef struct
 * `output.txt`: console output from `mersenne.asm`
 
 **Running `mersenne.c`**
+
 Checks primality of Mersenne numbers for 2 &le; p &lt; 550 
 ```
 $ cd ../MIPS-MersenneScan
