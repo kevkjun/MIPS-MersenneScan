@@ -20,4 +20,4 @@ $ ./mersenne
 * Load `mersenne.asm` into QtSpim
 * Run
     * Test cases will print to console
-    * Will use LLT algorithm to scan through Mersenne numbers for $3 \leq p \leq 128$
+    * Will use LLT algorithm to scan through Mersenne numbers for ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
