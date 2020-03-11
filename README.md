@@ -30,7 +30,7 @@ int Lucas_Lehmer_Test(int p)
 }
 ```
 
-### Program
+### Implementation
 * Uses *Bigint* struct which stores large numbers as array to circumvent overflow for large *M*<sub>p</sub> values
 ```C
 // Bigint interface
