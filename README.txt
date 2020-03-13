@@ -17,7 +17,6 @@ MIPS Program:
 			- Answer is written to Bigint on the heap
 			- Answer is copied into Bigint a
 		- pow_big is stored in data segment big_int2 - address to big_int2 is returned in $v0
-
 	- Running
 		- Load and run in QtSpim as normal
 		- Test cases written in main function
