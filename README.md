@@ -1,4 +1,4 @@
-# MIPS-MersenneScan
+# MersenneScan
 ## README
 Kevin Jun - March 10, 2020
 
