@@ -1,8 +1,6 @@
 # MIPS-MersenneScan
 ## README
-Kevin Jun
-
-March 10, 2020
+Kevin Jun - March 10, 2020
 
 ---
 
