@@ -62,6 +62,7 @@ main:
     la $a0, newline             ## load newline
     li $v0, 4                   ## load syscall for print string
     syscall                     ## print newline
+
 ## test compress
     la $a0, compress_msg        ## print compress test message
     li $v0, 4
@@ -74,6 +75,7 @@ main:
     jal compress                ## attempt to compress 0003
     jal print_big               ## attempt to print 3
     addi $sp, $sp, 1404         ## deallocate the created Bigint
+
 ## test shift_right - initialize Bigint(3), shift right 3 times, print (expected: 3000)
     la $a0, srt_msg             ## load shift_right_test_msg
     li $v0, 4                   ## print the message
@@ -86,6 +88,7 @@ main:
     jal shift_right
     jal print_big               ## print the Bigint
     addi $sp, $sp, 1404         ## deallocate the created Bigint
+
 ## test shift_left - initialize BigInt(7000), shift left 2 times, print (expected: 70)
     la $a0, slt_msg             ## load shift_right_test_msg
     li $v0, 4                   ## print the message
@@ -100,6 +103,7 @@ main:
     jal shift_left              ## Bigint should now be 70
     jal print_big               ## should print 70
     addi $sp, $sp, 1404         ## deallocate Bigint
+
 ## test compare_big
     la $a0, comp_test_msg       ## load comparison test msg
     li $v0, 4                   ## print msg
@@ -143,8 +147,8 @@ main:
     la $a0, newline             ## print newline
     li $v0, 4
     syscall
-    addi $sp, $sp, 1404         ## deallocate Bigint
-    addi $sp, $sp, 1404         ## deallocate Bigint
+    addi $sp, $sp, 2808         ## deallocate 2 Bigint
+
 ## test mult_big
     la $a0, mult_msg            ## load mult test message
     li $v0, 4                   ## print message
@@ -172,9 +176,7 @@ main:
     move $a1, $s1               ## load Bigint 42 to $a1
     jal mult_big                ## 30 * 42 - Bigint 1260 should be in $a0
     jal print_big
-    addi $sp, $sp, 1404         ## deallocate Bigint 1260
-    addi $sp, $sp, 1404         ## deallocate Bigint 6
-    addi $sp, $sp, 1404         ## deallocate Bigint 42
+    addi $sp, $sp, 4212         ## deallocate 3 Bigint: 1260, 6, 42
     li $a0, 1                   ## create Bigint 1
     jal digit_to_big
     move $a0, $v0               ## load Bigint 1 to $a0
@@ -199,8 +201,8 @@ main:
     move $a0, $s0               ## move Bigint 10,000,000 to $a0
     jal mult_big                ## 10,000,000 * 9,000,000 should be in $a0
     jal print_big               ## print Bigint 
-    addi $sp, $sp, 1404         ## deallocate Bigint 9,000,000
-    addi $sp, $sp, 1404         ## deallocate Bigint 42
+    addi $sp, $sp, 2808         ## deallocate 2 Bigint: 9,000,000 and 42
+
 ## test pow_big
     la $a0, pow_msg             ## load pow test message
     li $v0, 4                   ## print message
@@ -224,6 +226,7 @@ main:
     move $a0, $v0               ## print Bigint(42)^42
     jal print_big
     addi $sp, $sp, 1404         ## deallocate Bigint(42)^42
+
 ## test sub_big
     la $a0, sub_msg             ## load sub test message
     li $v0, 4                   ## print message
@@ -254,8 +257,7 @@ main:
     move $a0, $s0               ## load Bigint(42) to $a0
     jal sub_big                 ## 42 - 12: should be Bigint(30)
     jal print_big               ## print 30
-    addi $sp, $sp, 1404         ## deallocate Bigint(12)
-    addi $sp, $sp, 1404         ## deallocate Bigint(30)
+    addi $sp, $sp, 2808         ## deallocate 2 Bigint(12) and Bigint(30)
     li $a0, 9                   ## create Bigint 9
     jal digit_to_big
     move $a0, $v0               ## move Bigint(9) to $s0
@@ -294,8 +296,8 @@ main:
     move $a0, $s0               ## move 9,000,000,000 to $a0
     jal sub_big
     jal print_big
-    addi $sp, $sp, 1404         ## deallocate Bigint
-    addi $sp, $sp, 1404         ## deallocate Bigint
+    addi $sp, $sp, 2808         ## deallocate 2 Bigint
+
 ## test mod_big
     la $a0, mod_msg             ## load mod test message
     li $v0, 4                   ## print message
@@ -309,8 +311,7 @@ main:
     move $a0, $s0               ## move Bigint(7) to $a0
     jal mod_big                 ## 7 % 3 - should place 1 in $a0
     jal print_big               ## should print 1
-    addi $sp, $sp, 1404         ## deallocate Bigint
-    addi $sp, $sp, 1404         ## deallocate Bigint
+    addi $sp, $sp, 2808         ## deallocate 2 Bigint
     li $a0, 4                   ## create Bigint 4
     jal digit_to_big
     move $a0, $v0               ## move Bigint(4) to $a0
@@ -328,8 +329,7 @@ main:
     move $a0, $s0               ## move Bigint(48) to $a0
     jal mod_big                 ## 48 % 12
     jal print_big               ## should print 0
-    addi $sp, $sp, 1404         ## deallocate Bigint
-    addi $sp, $sp, 1404         ## deallocate Bigint
+    addi $sp, $sp, 2808         ## deallocate 2 Bigint
     li $a0, 9                   ## create Bigint 9
     jal digit_to_big
     move $a0, $v0               ## move Bigint(9) to $s0
@@ -368,8 +368,8 @@ main:
     move $a0, $s0               ## move 9,000,000,000 to $a0
     jal mod_big                 ## 9,000,000,000 % 7,654,321
     jal print_big               ## should print 6,172,825
-    addi $sp, $sp, 1404         ## deallocate Bigint
-    addi $sp, $sp, 1404         ## deallocate Bigint
+    addi $sp, $sp, 2808         ## deallocate 2 Bigint
+
 ## test LLT
     la $a0, LLT_msg             ## print LLT test message
     li $v0, 4
@@ -390,20 +390,24 @@ main:
     la $a0, newline             ## print newline
     li $v0, 4
     syscall
+
 ## mersenne scan
     la $a0, mersenne_msg        ## print mersenne message
     li $v0, 4
     syscall
     jal mersenne_scan           ## mersenne scan
+
 ## exit
     li $v0, 10
     syscall
 
+######################################################
 ## BEGIN CLEAR_BIG ##
 # return: clears big_int stored in $a0
 # $a0: caller-provided pointer to base of big_int
 # $t0: counter
 # $t1: big_int # of digits
+######################################################
 clear_big:                 
     li $t0, 0                   ## init counter
     lw $t1, ($a0)               ## set upper bound ($t1) for loop (# of digits in big_int)
@@ -416,6 +420,7 @@ clear_loop:                     ## loop to clear all values in big_int
 clear_exit:
     jr $ra                      ## return
 
+######################################################
 ## BEGIN COMPRESS ##
 # return: changes caller-provided Bigint a
 # $a0: caller-provided pointer to base of Bigint a
@@ -423,6 +428,7 @@ clear_exit:
 # $t1: counter
 # $t2: address of a.digits[i]
 # $t3: digits of Bigint
+######################################################
 compress:       
     lw $t0, 0($a0)              ## load the # of digits of Bigint a
     sub $t1, $t0, 1             ## subtract one from the # of digits to get the counter
@@ -442,12 +448,14 @@ compress_loop:
 compress_exit:  
     jr $ra                      ## return to jump-from address
 
+######################################################
 ## BEGIN DIGIT_TO_BIG ## 
 # return: pointer to Bigint b ($v0)
 # $a0: caller-provided int a
 # $t0: tmp register to store values
 # $t1: counter
-# $t2: store 1404 (351 * 4) = size of Bigint
+# $t2: store 1404 (3 1 * 4) = size of Bigint
+######################################################
 digit_to_big:
     li $t2, 1404                ## load 1404 (size of Bigint) to $t2
     li $t1, 0                   ## init counter
@@ -466,12 +474,14 @@ digit_end:
     sw $t0, 4($sp)              ## b.digits[0] = a
     jr $ra                      ## return to jump-from address
 
+######################################################
 ## BEGIN PRINT_BIG ##
 ## REUSES $A0 - MUST SAVE $A0 BEFORE CALLING PRINT_BIG ##
 # return: print to console
 # $a0: caller-provided pointer to Bigint b
 # $t0: counter
 # $t1: address to b.digits[counter]
+######################################################
 print_big:   
     lw $t0, ($a0)               ## load number of digits of b into $t0
     li $t1, 4                   ## load 4 to $t1 to multiply by b.n
@@ -492,12 +502,14 @@ print_exit:
     syscall
     jr $ra                      ## return to jump-from address
 
+######################################################
 ## BEGIN IS_SMALL_PRIME ##
 # return: 1 if prime and 0 otherwise in $v0
 # $a0: caller-provided pointer to int p
 # $t0: for loop limit
 # $t1: counter
 # $t2: holder for p % i
+######################################################
 is_small_prime:
     move $t0, $a0               ## move p to $t0
     sub $t0, $t0, 1             ## init limit for i
@@ -514,6 +526,7 @@ s_p_exit:
     li $v0, 1                   ## load 1 to return address
     jr $ra                      ## return to jump-from address
 
+######################################################
 ## BEGIN SHIFT_RIGHT ##
 # starts pointers at a.digits[i] and a.digits[i-1] and moves them inwards until counter == 0
 # return: Bigint shifted right by one place (multiplied by 10) - Bigint remains in $a0 register
@@ -521,6 +534,7 @@ s_p_exit:
 # $t0: counter and tmp register for a.n to increment at end
 # $t1: address of a.digits[i-1]
 # $t2: tmp register for a.digits[i-1]
+######################################################
 shift_right:
     lw $t0, ($a0)               ## init counter to a.n
     li $t1, 4                   ## load 4 to $t1 to multiply by a.n
@@ -540,6 +554,7 @@ sr_exit:
     sw $t0, ($a0)               ## a.n += 1
     jr $ra                      ## return to jump-from address
 
+######################################################
 ## BEGIN SHIFT_LEFT ##
 # return: Bigint shifted left by one place (divided by 10) - Bigint remains in $a0 register
 # $a0: caller-provided pointer to Bigint a
@@ -547,6 +562,7 @@ sr_exit:
 # $t1: a.n
 # $t2: address of a.digits[i]
 # $t3: tmp register for a.digits[i]
+######################################################
 shift_left:
     lw $t1, ($a0)               ## init $t1 to a.n
     beq $t1, $0, sl_if          ## jump to loop if a.n != 0
@@ -566,6 +582,7 @@ sl_exit:
 sl_if:
     jr $ra                      ## return to jump-from address if a.n == 0
 
+######################################################
 ## BEGIN COMPARE_BIG ##
 # return: in $v0: -1 if a < b | 0 if a == b | 1 if a > b
 # $a0: caller-provided pointer to Bigint a
@@ -577,6 +594,7 @@ sl_if:
 # $t4: a.digits[i]
 # $t5: pointer to b.digits[i]
 # $t6: b.digits[i]
+######################################################
 compare_big:
     lw $t0, ($a0)               ## $t0 = a.n
     lw $t1, ($a1)               ## $t1 = b.n
@@ -610,6 +628,7 @@ comp_equal:
     li $v0, 0                   ## return 0
     jr $ra
 
+######################################################
 ## BEGIN MULT_BIG ##
 ## uses big_int1 to store result Bigint object then copies it over to Bigint a
 # return: overwrites Bigint a to store a*b - return is not stored in $v0
@@ -629,6 +648,7 @@ comp_equal:
 # $t7: a.n + i
 # $t8: val
 # $t9: holder for 10 and (b.digits[i]*a.digits[j-i])
+######################################################
 mult_big:
     sub $sp, $sp, 4             ## move stack pointer to store $ra   
     sw $ra, ($sp)               ## re-load $ra (from beginning) from stack    
@@ -715,6 +735,7 @@ mult_exit:
     addi $sp, $sp, 4            ## move stack pointer back
     jr $ra                      ## return
 
+######################################################
 ## BEGIN POW_BIG ##
 ## first copy Bigint a to Bigint b (big_int2) then multiply Bigint b by itself p-1 times and return in $v0
 # return: Bigint b (Bigint a ^ p) stored in big_int2 and address returned in $v0 
@@ -724,6 +745,7 @@ mult_exit:
 # $t1: a.n
 # $t2: address for big_int2 (Bigint b)
 # $t3: element in Bigint a to be copied
+######################################################
 pow_big:
     sub $sp, $sp, 4             ## move stack pointer down to store $a0
     sw $ra, ($sp)               ## store $ra in stack
@@ -776,6 +798,7 @@ pow_exit:
     addi $sp, $sp, 4            ## move stack pointer back
     jr $ra                      ## return
 
+######################################################
 ## BEGIN SUB_BIG ##
 ## initially stored in big_int3 and copied to Bigint a
 # return: Bigint a - Bigint b stored in $a0 (replaces Bigint a)
@@ -791,6 +814,7 @@ pow_exit:
 # $t7: b.digits[j]
 # $t8: *big_int3[j]
 # $t9: aDigit - b.digits[j]
+######################################################
 sub_big:
     sub $sp, $sp, 4             ## move stack pointer to store $ra
     sw $ra, ($sp)               ## store $ra on stack
@@ -839,6 +863,7 @@ sub_exit:
     addi $sp, $sp, 4            ## move stack pointer back
     jr $ra                      ## returns
 
+######################################################
 ## BEGIN MOD_BIG ##
 ## original_b stored in big_int4 then cleared at the end
 # return: Bigint a % Bigint b - writes over Bigint a ($a0)
@@ -849,6 +874,7 @@ sub_exit:
 # $t2: counter for copying Bigint b to big_int4 | a.n
 # $t3: elements of b | element of big_int4
 # $t4: b.n
+######################################################
 mod_big:
     sub $sp, $sp, 4             ## move stack pointer to store $ra
     sw $ra, ($sp)               ## store $ra on stack
@@ -921,6 +947,7 @@ mod_exit:
     addi $sp, $sp, 4            ## move stack pointer back   
     jr $ra                      ## return
 
+######################################################
 ## BEGIN LLT ##
 ## tests if Mp = 2^p - 1 is a prime number
 # return: 1 if Mp is prime, 0 otherwise
@@ -932,6 +959,7 @@ mod_exit:
 # $s4: Bigint(2)
 # $s5: Bigint(4) (s)
 # $s6: store int p
+######################################################
 LLT:
     sub $sp, $sp, 4             ## move stack pointer to store $ra
     sw $ra, ($sp)               ## store $ra on stack
@@ -985,21 +1013,20 @@ LLT_else:
     li $v0, 0                   ## load 0 in return spot (not prime)
 LLT_exit:
     addi $sp, $sp, 4            ## deallocate counter
-    addi $sp, $sp, 1404         ## deallocate Bigint
-    addi $sp, $sp, 1404         ## deallocate Bigint
-    addi $sp, $sp, 1404         ## deallocate Bigint
-    addi $sp, $sp, 1404         ## deallocate Bigint
+    addi $sp, $sp, 5616         ## deallocate 4Bigint
     la $a0, big_int2            ## load big_int2 to $a0
     jal clear_big               ## clear big_int2
     lw $ra, ($sp)               ## restore $ra from stack
     addi $sp, $sp, 4            ## move stack pointer back
     jr $ra                      ## return
 
+######################################################
 ## BEGIN MERSENNE_SCAN ##
 ## no caller-provided arguments - lower bound 3 and upper bound 128 for p are hardcoded
 # return: scans through prime values p from 3 to 128 for Mp primacy and outputs results to console
 # $a0: counter which starts at 3
 # $a1: 128
+######################################################
 mersenne_scan:
     sub $sp, $sp, 4             ## move stack pointer to store $ra
     sw $ra, ($sp)               ## store $ra on stack
